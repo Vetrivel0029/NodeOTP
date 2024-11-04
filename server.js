@@ -1,11 +1,25 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const path = require('path');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const otpCache = {'email':'',"otp":0};
+app.use(
+  '/NodeOTP',  // Path to be proxied
+  createProxyMiddleware({
+    target: 'https://vetrivel0029.github.io/NodeOTP/', // URL of your deployed Express app
+    changeOrigin: true,
+    pathRewrite: {
+      '^/NodeOTP': '', // Remove the /NodeOTP prefix when forwarding to backend
+    },
+  })
+);
 
 app.post('/send-otp', async (req, res) => {
   const { email } = req.body;
