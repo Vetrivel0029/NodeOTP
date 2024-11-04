@@ -33,7 +33,7 @@ app.post('/send-otp', async (req, res) => {
   });
   let mailOptions = {
     from: 'no-reply@agm.com',
-    to: 'vetri@mailinator.com',
+    to: email.toString(),
     subject: 'Your OTP Code',
     text: `Your OTP code is ${otp}`
   };
