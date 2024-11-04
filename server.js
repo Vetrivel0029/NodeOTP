@@ -13,7 +13,7 @@ const otpCache = {'email':'',"otp":0};
 app.use(
   '/NodeOTP',  // Path to be proxied
   createProxyMiddleware({
-    target: 'https://vetrivel0029.github.io/NodeOTP/', // URL of your deployed Express app
+    target: 'https://vetrivel0029.github.io', // URL of your deployed Express app
     changeOrigin: true,
     pathRewrite: {
       '^/NodeOTP': '', // Remove the /NodeOTP prefix when forwarding to backend
