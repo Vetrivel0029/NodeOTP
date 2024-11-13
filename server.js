@@ -41,7 +41,7 @@ app.post('/send-otp', async (req, res) => {
     await transporter.sendMail(mailOptions);
     res.status(200).send('OTP sent');
     
-    otpCache['email'] = 'vetri@mailinator.com';
+    otpCache['email'] = email.toString();
     otpCache['otp'] = otp;
   
     
