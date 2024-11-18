@@ -39,7 +39,11 @@ app.post('/send-otp', async (req, res) => {
   };
   try {
     await transporter.sendMail(mailOptions);
-    res.status(200).send('OTP sent');
+    // res.status(200).send('OTP sent');
+    res.status(200).send({
+      message:'OTP sent',
+      otp_number:otp
+    });
     
     otpCache['email'] = email.toString();
     otpCache['otp'] = otp;
